@@ -7,8 +7,8 @@ Vagrant.configure("2") do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "c65"
-  config.vm.box_url = "http://vntx.cc/boxes/centos65.box"
+  config.vm.box = "centos/7"
+ # config.vm.box_url = "http://vntx.cc/boxes/centos65.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -47,6 +47,7 @@ Vagrant.configure("2") do |config|
 
   # provision with ansible
   config.vm.provision "ansible" do |ansible|
+    ansible.verbose           = "vvv"
     ansible.playbook          = "playbook.yaml"
     ansible.sudo              = true
     ansible.host_key_checking = false

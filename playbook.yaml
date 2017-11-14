@@ -3,7 +3,8 @@
   gather_facts: false
   vars:
     bamboo:    atlassian-bamboo
-    bamboover: 5.4
+    #bamboover: 5.4
+    bamboover: 6.1.1 
     dlpath:    software/bamboo/downloads/binary
     tmp:       /var/tmp
     installto: /opt
@@ -20,6 +21,13 @@
       yum:
         name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
         state=present
+
+
+    - name: Ensure mysql repo is install 
+      yum:
+        name=http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+        state=present
+
 
     # You don't need this - it's because I can't type anything other than 'l'
     - name: Ensure aliases.sh present
@@ -40,7 +48,7 @@
 
     - name: Fetch Bamboo install
       get_url:
-        url=http://www.atlassian.com/{{ dlpath }}/{{ bamboo }}-{{ bamboover }}.tar.gz
+        url=http://www.atlassian.com/{{ dlpath }}/{{ bamboo }}-{{ bamboover }}.tar.gz 
         dest={{ tmp }}/bamboo.tgz
       register: fetch
       tags: install
